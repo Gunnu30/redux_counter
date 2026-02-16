@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+🔑 Core Concepts
+Store Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The store is created using configureStore from Redux Toolkit.
 
-## Available Scripts
+It combines all slices (in this case, the counterSlice) into a single source of truth for the app.
 
-In the project directory, you can run:
+Counter Slice
 
-### `npm start`
+Defined with createSlice, which bundles the state, reducers, and actions together.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Initial state: { value: 0 }.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Reducers include:
 
-### `npm test`
+increment: increases the counter by 1
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+decrement: decreases the counter by 1
 
-### `npm run build`
+incrementByAmount: increases the counter by a custom number (payload)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+reset: resets the counter back to 0
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+React Integration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The <Provider store={store}> wraps the app, making the Redux store available to all components.
 
-### `npm run eject`
+Components use:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+useSelector to read the current counter value from the store.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+useDispatch to send actions (like increment or reset) to update the store.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+UI Interaction
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Buttons trigger actions via dispatch.
 
-## Learn More
+The displayed counter value updates automatically whenever the store changes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Example actions:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
++ → dispatches increment()
 
-### Code Splitting
+- → dispatches decrement()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Add Batch (+5) → dispatches incrementByAmount(5)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Reset Count → dispatches reset()
